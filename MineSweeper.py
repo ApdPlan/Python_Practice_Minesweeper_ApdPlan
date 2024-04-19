@@ -11,7 +11,7 @@ list_of_mines = [""] * 10
 early_end = [False]
 player_input = ''
 mine_markers_list = [""] * 10 
-mine_surroundings_check = (-11, -10, -9, -1, 1, 9, 10, 11)
+spread_verification = set()
 
 
 def create_player_grid(visible_spaces_string, game_continues):
@@ -35,9 +35,8 @@ def print_grid(visible_spaces_string, game_continues):
     print(visible_spaces_string)
 
 
-spread_verification = set()
-spread_surrounding_spots = (-10, -1, 1, 10)
 def spreading_search(players_chosen_location, spread_verification ):
+    spread_surrounding_spots = (-10, -1, 1, 10)
     for i in spread_surrounding_spots:
         if (players_chosen_location + i) in spread_verification:
             pass
@@ -115,6 +114,7 @@ def main_game_loop():
     while (i < 10):
         current_position = list_of_mines[i]
         n = 0
+        mine_surroundings_check = (-11, -10, -9, -1, 1, 9, 10, 11)
         for n in mine_surroundings_check:
             if ((current_position + n) <= 99 and (current_position + n) >= 0):
                 if((list_of_mines[i]+10)%10 == 0 and (n == -1 or n == -11 or n == 9) ):
